@@ -1,10 +1,10 @@
 # [level 0] 마지막 두 원소 - 181927 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181927) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181927?language=java) 
 
 ### 성능 요약
 
-메모리: 33.4 MB, 시간: 0.05 ms
+메모리: 70.7 MB, 시간: 6.63 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 09월 24일 14:35:51
+2024년 09월 25일 15:51:58
 
 ### 문제 설명
 
