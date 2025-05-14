@@ -19,3 +19,12 @@ def solution(priorities, location):
             order+=1
         else:
             queue.append((idx, val))
+
+# queue = 중요도를 (인덱스, 값)의 형태로 담고 있는 deque 리스트
+# p = 중요도의 순서를 나타내는 리스트
+# counter = 각 중요도 별 존재 갯수를 담고 있는 딕셔너리
+# order = 현재 실행 순서를 나타내는 변수
+
+# queue에 내용물이 없을때까지 반복
+# queue에서 꺼낸 값이 최상위 중요도라면, 인덱스가 locations가 동일한지 비교한다.
+# 만약 최상위 중요도가 아니라면, 다시 queue에 값을 넣는다.
