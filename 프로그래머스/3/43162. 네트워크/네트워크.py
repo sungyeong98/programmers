@@ -1,14 +1,27 @@
-def solution(n, c):
-    answer = 0
-    q,v=[],[]
-    for i in range(n):
-        if i not in v:
-            q.append(i)
-            answer+=1
-            while q:
-                temp=q.pop(0)
-                for j in range(n):
-                    if c[temp][j]==1 and j not in v:
-                        v.append(j)
-                        q.append(j)
-    return answer
+from collections import defaultdict, deque
+def solution(n, computers):
+    networks = defaultdict(list)
+    for idx, network_list in enumerate(computers):
+        for i, val in enumerate(network_list):
+            if idx != i and val == 1:
+                networks[idx].append(i)
+    
+    visited = set()
+    result = 0
+    for computer in range(n):
+        if computer in visited:
+            continue
+        queue = deque([])
+        queue.append(computer)
+        
+        while queue:
+            cur_computer = queue.popleft()
+            
+            if cur_computer not in visited:
+                visited.add(cur_computer)
+                for next_computer in networks[cur_computer]:
+                    queue.append(next_computer)
+                    
+        result += 1
+    
+    return result
