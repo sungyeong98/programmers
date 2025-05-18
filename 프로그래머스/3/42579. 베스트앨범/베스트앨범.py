@@ -1,23 +1,23 @@
-def solution(g, p):
-    answer = []
-    a={}
-    for i in range(0,len(g)):
-        if g[i] in a:
-            a[g[i]].append([i,p[i]])
+from collections import defaultdict
+def solution(genres, plays):
+    music = defaultdict(list)
+    cnt = defaultdict(int)
+    result = []
+    
+    for idx, val in enumerate(genres):
+        music[val].append((idx, plays[idx]))
+        cnt[val] += plays[idx]
+    
+    
+    
+    for music_type in sorted(cnt.keys(), key=lambda x:-cnt[x]):
+        music[music_type].sort(key=lambda x:(-x[1], x[0]))
+        
+        if len(music[music_type]) > 1:
+            result.append(music[music_type][0][0])
+            result.append(music[music_type][1][0])
+        
         else:
-            a[g[i]]=[[i,p[i]]]
-    a={x:sorted(y,reverse=True,key=lambda x:x[1]) for x,y in a.items()}
-    temp={}
-    for i in a:
-        b=[]
-        for j in a[i]:
-            b.append(j[1])
-        temp[i]=sum(b)
-    temp=dict(sorted(temp.items(),key=lambda x:x[1],reverse=True))
-    for i in temp:
-        if len(a[i])==1:
-            answer.append(a[i][0][0])
-        else:
-            answer.append(a[i][0][0])
-            answer.append(a[i][1][0])
-    return answer
+            result.append(music[music_type][0][0])
+    
+    return result
