@@ -18,6 +18,7 @@ def solution(maps):
         for dx, dy in dir:
             nx, ny = x + dx, y + dy
             
+            # 다음 경로가 범위 내에 있고, 방문하지 않은 상태이며, 벽이 아닐 때 실행
             if 0<=nx<n and 0<=ny<m and not visited[nx][ny] and maps[nx][ny]==1:
                 visited[nx][ny] = True
                 queue.append((nx, ny, cnt + 1))
