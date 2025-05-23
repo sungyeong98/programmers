@@ -2,6 +2,7 @@ from itertools import permutations
 def solution(k, dungeons):
     result, n = 0, len(dungeons)
     
+    # 던전 탐험 순열
     for p in permutations(list(range(n)), n):
         cur_energy, cnt = k, 0
         for idx in p:
