@@ -1,18 +1,18 @@
+from heapq import heappush, heappop
 def solution(operations):
-    answer = []
-    temp=[]
-    for i in operations:
-        if "I" in i:
-            temp.append(int(i[2:]))
-        elif i=='D 1':
-            if temp:
-                del temp[temp.index(max(temp))]
-        else:
-            if temp:
-                del temp[temp.index(min(temp))]
-    if not temp or len(temp)==1:
-        return [0,0]
-    else:
-        answer.append(max(temp))
-        answer.append(min(temp))
-    return answer
+    temp1, temp2 = [], []
+    
+    for op in operations:
+        word, num = op.split(" ")
+        
+        if word == "I":
+            heappush(temp1, int(num))
+            heappush(temp2, -int(num))
+        elif word == "D" and num == "1" and temp1:
+            target = heappop(temp2)
+            temp1.remove(-target)
+        elif word == "D" and num == "-1" and temp1:
+            target = heappop(temp1)
+            temp2.remove(-target)
+            
+    return [max(temp1), min(temp1)] if temp1 else [0, 0]
