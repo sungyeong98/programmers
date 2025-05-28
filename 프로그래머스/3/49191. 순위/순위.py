@@ -1,19 +1,16 @@
+from collections import defaultdict
 def solution(n, results):
-    temp = [[float("inf")]*n for _ in range(n)]
-    
-    for i in range(n):
-        temp[i][i] = 0          # 자기 자신은 0으로 처리
+    winner = defaultdict(set)
+    loser = defaultdict(set)
     
     for a, b in results:
-        temp[a-1][b-1] = 1      # 승리
-        temp[b-1][a-1] = -1     # 패배
+        winner[a].add(b)
+        loser[b].add(a)
     
-    # Floyd-Warshall Algorithm
-    for k in range(n):          # 새 정점  
-        for i in range(n):      # 시작 노드
-            for j in range(n):  # 끝 노드
-                if temp[i][k] == 1 and temp[k][j] == 1:
-                    temp[i][j] = 1
-                    temp[j][i] = -1
+    for player in range(1, n+1):
+        for win_player in loser[player]:
+            winner[win_player].update(winner[player])
+        for lose_player in winner[player]:
+            loser[lose_player].update(loser[player])
     
-    return n - sum([1 if float("inf") in i else 0 for i in temp])
+    return sum([1 if len(winner[i]) + len(loser[i]) == n-1 else 0 for i in range(1, n+1)])
