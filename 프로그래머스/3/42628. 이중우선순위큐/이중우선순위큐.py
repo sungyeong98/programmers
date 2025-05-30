@@ -6,8 +6,8 @@ def solution(operations):
         word, num = op.split(" ")   # 명령어, 숫자
         
         if word == "I":     # 숫자 삽입
-            heappush(temp1, int(num))   # 최대힙에 숫자 삽입
-            heappush(temp2, -int(num))  # 최소힙에 숫자 삽입
+            heappush(temp1, int(num))   # 최소힙에 숫자 삽입
+            heappush(temp2, -int(num))  # 최대힙에 숫자 삽입
         elif word == "D" and num == "1" and temp1:  # 최댓값 삭제 명령어
             target = heappop(temp2) # 최대힙에서 최대값 추출
             temp1.remove(-target)   # 최소힙에서 -target값 추출
