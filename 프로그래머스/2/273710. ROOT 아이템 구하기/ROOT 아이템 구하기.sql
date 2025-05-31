@@ -1,8 +1,10 @@
-select
-    a.ITEM_ID as ITEM_ID,
-    a.ITEM_NAME as ITEM_NAME
-from ITEM_INFO as a, ITEM_TREE as b
-where
-    a.ITEM_ID=b.ITEM_ID and
-    b.PARENT_ITEM_ID is null
+with temp as (
+    select ITEM_ID
+    from ITEM_TREE
+    where PARENT_ITEM_ID is null
+)
+
+select t.ITEM_ID, i.ITEM_NAME
+from temp t
+join ITEM_INFO i on t.ITEM_ID = i.ITEM_ID
 order by ITEM_ID
