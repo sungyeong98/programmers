@@ -1,12 +1,5 @@
--- 코드를 입력하세요
-SELECT
-    USER_ID,
-    PRODUCT_ID
-FROM ONLINE_SALE
-GROUP BY
-    USER_ID,
-    PRODUCT_ID
-HAVING
-    count(USER_ID)>1
-ORDER BY
-    USER_ID,PRODUCT_ID DESC
+select USER_ID, PRODUCT_ID
+from ONLINE_SALE
+group by USER_ID, PRODUCT_ID
+having count(USER_ID) > 1
+order by USER_ID, PRODUCT_ID desc
