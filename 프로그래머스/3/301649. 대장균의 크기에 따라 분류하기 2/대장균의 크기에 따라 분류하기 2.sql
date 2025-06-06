@@ -1,16 +1,16 @@
 with temp as (
-    select
+    select 
         ID,
-        ntile(4) over (order by SIZE_OF_COLONY) as q
-    from ECOLI_DATA 
+        ntile(4) over(order by SIZE_OF_COLONY) as SIZE
+    from ECOLI_DATA
 )
-select
-    ID,
+
+select ID,
     case
-        when q=4 then 'CRITICAL'
-        when q=3 then 'HIGH'
-        when q=2 then 'MEDIUM'
-        when q=1 then 'LOW'
+        when SIZE = 1 then "LOW"
+        when SIZE = 2 then "MEDIUM"
+        when SIZE = 3 then "HIGH"
+        else "CRITICAL"
     end as COLONY_NAME
 from temp
 order by ID
