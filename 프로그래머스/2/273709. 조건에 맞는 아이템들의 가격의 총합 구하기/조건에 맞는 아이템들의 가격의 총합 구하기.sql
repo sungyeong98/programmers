@@ -1,5 +1,3 @@
-select
-    sum(PRICE) as TOTAL_PRICE
+select sum(PRICE) as TOTAL_PRICE
 from ITEM_INFO
-where
-    RARITY='LEGEND'
+where RARITY = "LEGEND"
