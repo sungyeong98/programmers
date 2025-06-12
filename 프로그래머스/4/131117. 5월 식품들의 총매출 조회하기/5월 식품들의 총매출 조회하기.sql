@@ -1,16 +1,11 @@
--- 코드를 입력하세요
-SELECT
-    a.PRODUCT_ID as PRODUCT_ID,
-    a.PRODUCT_NAME,
-    a.PRICE*b.total_amount as TOTAL_SALES
-from FOOD_PRODUCT as a
-inner join (
-    select PRODUCT_ID,sum(AMOUNT) as total_amount,PRODUCE_DATE
+with temp as (
+    select PRODUCT_ID, sum(AMOUNT) as AMOUNT
     from FOOD_ORDER
-    where
-        date_format(PRODUCE_DATE,'%Y-%m')='2022-05'
+    where year(PRODUCE_DATE) = 2022 and month(PRODUCE_DATE) = 5
     group by PRODUCT_ID
-) as b
-    on a.PRODUCT_ID=b.PRODUCT_ID
-order by
-    TOTAL_SALES desc, PRODUCT_ID
+)
+
+select p.PRODUCT_ID, p.PRODUCT_NAME, p.PRICE * t.AMOUNT as TOTAL_SALES
+from FOOD_PRODUCT p
+join temp t on p.PRODUCT_ID = t.PRODUCT_ID
+order by TOTAL_SALES desc, PRODUCT_ID
