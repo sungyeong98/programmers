@@ -1,20 +1,17 @@
 def solution(sequence):
-    if len(sequence)==1:
-        return abs(sequence[0])
-    answer = 0
-    c1=[1,-1]
-    c2=[-1,1]
-    a,b=[],[]
-    for i in range(0,len(sequence)):
-        a.append(c1[i%2]*sequence[i])
-        b.append(c2[i%2]*sequence[i])
-    a1=chk(a)
-    b1=chk(b)
-    return max(a1,b1)
+    if len(sequence) == 1:  return abs(sequence[0])
+    
+    temp1 = [val if idx % 2 == 0 else -val for idx, val in enumerate(sequence)]
+    temp2 = [val if idx % 2 == 1 else -val for idx, val in enumerate(sequence)]
+    
+    return max(find_max_value(temp1), find_max_value(temp2))
 
-def chk(arr):
-    temp=[0]*len(arr)
-    temp[0]=arr[0]
-    for i in range(0,len(arr)):
-        temp[i]=max(0,temp[i-1])+arr[i]
-    return max(temp)
+def find_max_value(seq):
+    n = len(seq)
+    result = [0] * n
+    result[0] = seq[0]
+    
+    for idx, val in enumerate(seq):
+        result[idx] = max(0, result[idx - 1]) + val
+    
+    return max(result)
