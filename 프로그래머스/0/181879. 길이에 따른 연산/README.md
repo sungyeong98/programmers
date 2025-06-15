@@ -1,10 +1,10 @@
 # [level 0] 길이에 따른 연산 - 181879 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181879) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181879?language=kotlin) 
 
 ### 성능 요약
 
-메모리: 81.7 MB, 시간: 1.15 ms
+메모리: 65.5 MB, 시간: 21.86 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 09월 30일 15:32:39
+2025년 06월 15일 22:12:03
 
 ### 문제 설명
 
