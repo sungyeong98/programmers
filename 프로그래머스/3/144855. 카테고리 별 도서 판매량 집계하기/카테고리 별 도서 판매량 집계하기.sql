@@ -1,15 +1,11 @@
-select
-    a.CATEGORY,
-    sum(b.total_sales) as TOTAL_SALES
-from (
-    select
-        BOOK_ID,
-        sum(SALES) as total_sales
+with temp as (
+    select BOOK_ID, SALES
     from BOOK_SALES
-    where date_format(SALES_DATE,'%Y-%m')='2022-01'
-    group by BOOK_ID
-) as b
-inner join BOOK as a
-    on a.BOOK_ID=b.BOOK_ID
-group by a.CATEGORY
-order by a.CATEGORY
+    where year(SALES_DATE) = 2022 and month(SALES_DATE) = 1
+)
+
+select b.CATEGORY, sum(t.SALES) as TOTAL_SALES
+from BOOK b
+join temp t on b.BOOK_ID = t.BOOK_ID
+group by b.CATEGORY
+order by CATEGORY
