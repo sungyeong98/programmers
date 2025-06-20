@@ -9,8 +9,6 @@ def solution(land):
             if (i, j) not in visited and land[i][j] == 1:
                 visited.add((i, j))
                 bfs(i, j, land, visited, oil, n, m)
-    
-    print(oil)
 
     return max(oil.values()) if oil else 0
 
