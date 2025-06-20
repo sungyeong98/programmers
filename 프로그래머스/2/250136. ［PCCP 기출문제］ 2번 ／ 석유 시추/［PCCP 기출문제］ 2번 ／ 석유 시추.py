@@ -1,32 +1,38 @@
-dx=[-1,1,0,0]
-dy=[0,0,1,-1]
-from collections import deque
+from collections import deque, defaultdict
 def solution(land):
-    max_oil=0
-    oil={i:0 for i in range(len(land[0]))}
-    visited=set()
-    for i in range(len(land)):
-        for j in range(len(land[0])):
-            if (i,j) not in visited and land[i][j]==1:
-                bfs(i,j,land,visited,oil)
-    for i in oil:
-        max_oil=max(max_oil,oil[i])
-    return max_oil
-def bfs(x,y,land,visited,oil):
-    q=deque()
-    q.append([x,y])
-    new_col,start_num=set(),len(visited)
-    while q:
-        cx,cy=q.popleft()
-        if (cx,cy) not in visited:
-            visited.add((cx,cy))
-            new_col.add(cy)
-            for i in range(4):
-                nx,ny=cx+dx[i],cy+dy[i]
-                if 0<=nx<len(land) and 0<=ny<len(land[0]) and land[nx][ny]==1:
-                    q.append([nx,ny])
-    col_chk=[]
-    for i in new_col:
-        if i not in col_chk:
-            col_chk.append(i)
-            oil[i]+=len(visited)-start_num
+    n, m = len(land), len(land[0])
+    oil = defaultdict(int)
+    visited = set()
+    
+    for i in range(n):
+        for j in range(m):
+            if (i, j) not in visited and land[i][j] == 1:
+                visited.add((i, j))
+                bfs(i, j, land, visited, oil, n, m)
+    
+    print(oil)
+
+    return max(oil.values()) if oil else 0
+
+def bfs(x, y, land, visited, oil, n, m):
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    queue = deque([(x, y)])
+    temp = set([y])
+    start_cnt = len(visited)
+    
+    while queue:
+        cx, cy = queue.popleft()
+        
+        for dx, dy in directions:
+            nx = cx + dx
+            ny = cy + dy
+            
+            if 0 <= nx < n and 0 <= ny < m and (nx, ny) not in visited and land[nx][ny] == 1:
+                visited.add((nx, ny))
+                queue.append((nx, ny))
+                temp.add(ny)
+                
+    cnt = len(visited) - start_cnt + 1
+
+    for col in temp:
+        oil[col] += cnt
