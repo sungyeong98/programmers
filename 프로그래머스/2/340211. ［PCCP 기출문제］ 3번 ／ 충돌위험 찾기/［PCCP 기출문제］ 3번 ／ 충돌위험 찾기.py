@@ -23,7 +23,7 @@ def solution(points, routes):
 
     for time in load:
         for loc in load[time]:
-            if len(load[time][loc]) >= 2:  # 로봇 2대 이상이면 위험
+            if len(load[time][loc]) >= 2:
                 result += 1
 
     return result
